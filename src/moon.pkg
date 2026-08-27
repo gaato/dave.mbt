@@ -1,0 +1,13 @@
+import {
+  "gaato/dave/internal/ffi",
+}
+
+import {
+  "moonbitlang/core/env",
+} for "test"
+
+supported_targets = "js + native"
+
+options(
+  targets: { "js_unavailable_test.mbt": [ "js" ] },
+)

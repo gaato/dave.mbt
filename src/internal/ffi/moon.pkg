@@ -1,0 +1,10 @@
+import {
+  "moonbitlang/core/encoding/utf8",
+}
+
+supported_targets = "js + native"
+
+options(
+  "native-stub": [ "loader.c" ],
+  targets: { "ffi.mbt": [ "native" ], "ffi_js.mbt": [ "js" ] },
+)
