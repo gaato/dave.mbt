@@ -22,7 +22,7 @@ test "commit result decoding preserves upserts and removals" {
     roster_record(18446744073709551615UL, b"high-id"),
   ]
   assert_eq(
-    decode_commit_result(raw, MlsFailure::{ source: "x", reason: "y" }),
+    decode_commit_result(raw, MlsFailure::{ source: "x", reason: "y", }),
     Applied(changes=[
       Upsert(user_id=42UL, signature_key=b"signature"),
       Remove(user_id=99UL),
@@ -40,7 +40,7 @@ test "commit result decoding preserves ignored and failed outcomes" {
     }),
     CommitResult::Ignored,
   )
-  let failure = MlsFailure::{ source: "ProcessCommit", reason: "invalid" }
+  let failure = MlsFailure::{ source: "ProcessCommit", reason: "invalid", }
   assert_eq(
     decode_commit_result([b"\x02"], failure),
     CommitResult::Failed(failure~),
@@ -49,7 +49,7 @@ test "commit result decoding preserves ignored and failed outcomes" {
 
 ///|
 test "Welcome result decoding preserves roster changes" {
-  let failure = MlsFailure::{ source: "unused", reason: "unused" }
+  let failure = MlsFailure::{ source: "unused", reason: "unused", }
   assert_eq(
     decode_welcome_result(
       [b"\x00", roster_record(7UL, b"sig"), roster_record(8UL, b"")],
@@ -79,7 +79,7 @@ test "native result decoder rejects unknown tags" {
 
 ///|
 test "native result decoder rejects malformed records and tags" {
-  let failure = MlsFailure::{ source: "unused", reason: "unused" }
+  let failure = MlsFailure::{ source: "unused", reason: "unused", }
   try decode_commit_result([], failure) catch {
     DaveError::NativeFailure(..) => ()
     _ => fail("unexpected empty-result decode error")

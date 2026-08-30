@@ -16,7 +16,12 @@ native-handle constructors raise `DaveError::LibraryUnavailable`.
 
 ## Using the API
 
-Import the root package from `moon.pkg`:
+Add the released module to the consumer and import the root package from
+`moon.pkg`:
+
+```fish
+moon add gaato/dave@0.1.0
+```
 
 ```moonbit
 import {
@@ -84,6 +89,15 @@ stored fingerprint, display code, or trust decision when that boundary changes.
 The fingerprint-format version is fixed to the canonical protocol value zero;
 callers cannot substitute another version. The method waits for libdave's
 asynchronous fingerprint worker and must not be called on an event-loop thread.
+
+Formatting the current-group result is an explicit second step:
+
+```moonbit
+let fingerprint = session.current_group_pairwise_fingerprint_blocking(
+  user_id=peer_user_id,
+)
+let display_code = @dave.pairwise_verification_code(fingerprint)
+```
 
 ## Native runtime
 

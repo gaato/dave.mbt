@@ -7,6 +7,11 @@ facade so a multi-target dependency graph can still be checked and tested.
 
 ## Normal installation
 
+Native bootstrap requires Node.js 18 or newer. Linux and macOS hosts also need
+`unzip`; Windows uses PowerShell's `Expand-Archive`. The first online build
+needs HTTPS access to the pinned GitHub Release asset. Offline builds must
+preseed a verified extraction as described below.
+
 The module's experimental Moon prebuild hook provisions a host library only
 when a Moon command sets `MBT_DAVE_REQUIRE_NATIVE=1`. It selects the asset
 matching the build host, downloads the pinned `v1.2.0/cpp` archive, checks its

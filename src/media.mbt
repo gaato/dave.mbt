@@ -78,7 +78,7 @@ pub fn Encryptor::new() -> Encryptor raise DaveError {
   if !raw.is_valid() {
     raise NativeFailure(operation~, reason="failed to create a DAVE encryptor")
   }
-  Encryptor::{ raw, codecs: Map([]) }
+  Encryptor::{ raw, codecs: Map([]), }
 }
 
 ///|

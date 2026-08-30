@@ -20,16 +20,4 @@ source = "src"
 
 options(
   "--moonbit-unstable-prebuild": "build.js",
-  exclude: [
-    "/AGENTS.md",
-    "/cmd/",
-    "/dave.mbt",
-    "/dave_test.mbt",
-    "/dave_wbtest.mbt",
-    "/moon.pkg",
-    "/test/",
-    "_build",
-    "target",
-    ".repos",
-  ],
 )
