@@ -1,5 +1,7 @@
 # gaato/dave
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gaato/dave.mbt)
+
 Safe native MoonBit bindings for Discord's official
 [`libdave`](https://github.com/discord/libdave) C API.
 
