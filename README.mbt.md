@@ -1,6 +1,9 @@
 # gaato/dave
 
+[![CI](https://github.com/gaato/dave.mbt/actions/workflows/ci.yml/badge.svg)](https://github.com/gaato/dave.mbt/actions/workflows/ci.yml)
+[![mooncakes](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fmooncakes.io%2Fapi%2Fv0%2Fmodules%2Fgaato%2Fdave&query=%24.version&label=mooncakes&prefix=v)](https://mooncakes.io/docs/gaato/dave)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gaato/dave.mbt)
+[![License](https://img.shields.io/github/license/gaato/dave.mbt)](LICENSE)
 
 Safe native MoonBit bindings for Discord's official
 [`libdave`](https://github.com/discord/libdave) C API.
