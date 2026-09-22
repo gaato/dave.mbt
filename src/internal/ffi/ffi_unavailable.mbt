@@ -1,38 +1,8 @@
 ///|
-/// Inert handles used to keep the binding's package interface available when
-/// a dependency graph is checked for JavaScript. Real DAVE operations remain
-/// native-only and the safe facade rejects construction before using them.
-pub type RawSession
-
-///|
-pub type RawKeyRatchet
-
-///|
-pub type RawEncryptor
-
-///|
-pub type RawDecryptor
-
-///|
-extern "js" fn raw_session_stub_new() -> RawSession = "() => ({})"
-
-///|
-extern "js" fn raw_key_ratchet_stub_new() -> RawKeyRatchet = "() => ({})"
-
-///|
-extern "js" fn raw_encryptor_stub_new() -> RawEncryptor = "() => ({})"
-
-///|
-extern "js" fn raw_decryptor_stub_new() -> RawDecryptor = "() => ({})"
-
-///|
+// Shared unavailable implementation for JS and Wasm. The public safe facade
+// rejects construction with LibraryUnavailable before any raw handle is used.
 pub fn available() -> Bool {
   false
-}
-
-///|
-pub fn unavailable_reason() -> String {
-  "libdave is unavailable on the JavaScript backend"
 }
 
 ///|

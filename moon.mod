@@ -1,6 +1,6 @@
 name = "gaato/dave"
 
-version = "0.1.0"
+version = "0.1.1"
 
 readme = "README.mbt.md"
 
@@ -14,7 +14,11 @@ description = "Safe native MoonBit bindings for Discord's official libdave C API
 
 preferred_target = "native"
 
-supported_targets = "js + native"
+supported_targets = "js + native + wasm"
+
+// Keep the existing derived-trait API while validating on the pinned 0.10.14.
+
+warnings = "-implicit_impl_as_method"
 
 source = "src"
 

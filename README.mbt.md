@@ -15,8 +15,9 @@ opcodes, participant bookkeeping, transition timing, RTP/UDP transport, and
 recovery policy stay in the application.
 
 Real DAVE operations target MoonBit's native backend and pin upstream
-`libdave` `v1.2.0/cpp`. The package also type-checks on JavaScript so it can
-remain in a multi-target dependency graph; there `available()` is false and
+`libdave` `v1.2.0/cpp`. The package also type-checks on JavaScript and
+linear-memory Wasm so it can remain in a multi-target dependency graph;
+there `available()` is false and
 native-handle constructors raise `DaveError::LibraryUnavailable`.
 
 ## Using the API
@@ -116,7 +117,7 @@ env MBT_DAVE_REQUIRE_NATIVE=1 moon build --target native --release --deny-warn
 
 The shared library is loaded at runtime; it is not installed system-wide or
 embedded in the Mooncake. Builds without `MBT_DAVE_REQUIRE_NATIVE=1`, including
-JavaScript builds, do not bootstrap a host library.
+JavaScript and Wasm builds, do not bootstrap a host library.
 
 See [Native libdave runtime](docs/native-runtime.md) for cache paths, offline
 and preseeded builds, environment overrides, and loader order.
@@ -142,7 +143,7 @@ on older distributions need a compatible self-built library supplied through
 
 ## Verification
 
-On a supported host, bootstrap the pinned runtime and verify both backends with:
+On a supported host, bootstrap the pinned runtime and verify the backends with:
 
 ```fish
 moon fmt --check
@@ -151,6 +152,7 @@ moon check --target all --deny-warn
 env MBT_DAVE_REQUIRE_NATIVE=1 moon build --target native --release --deny-warn
 env MBT_DAVE_REQUIRE_NATIVE=1 moon test --target native --release --deny-warn
 moon test --target js --release --deny-warn
+moon test --target wasm --release --deny-warn
 moon info --target native
 moon package --list
 ```

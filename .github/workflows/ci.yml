@@ -9,13 +9,17 @@ permissions:
   contents: read
 
 jobs:
-  js:
-    name: JavaScript unavailable facade
+  unavailable:
+    name: Unavailable facade (${{ matrix.target }})
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [js, wasm]
     env:
-      MBT_DAVE_NATIVE_ROOT: /definitely/missing/dave-js-must-not-bootstrap
-      MOONBIT_INSTALL_VERSION: "0.10.11+8f8e8db1e"
+      MBT_DAVE_NATIVE_ROOT: /definitely/missing/dave-must-not-bootstrap
+      MOONBIT_INSTALL_VERSION: "0.10.14+7d59c7ec9"
 
     steps:
       - name: Check out repository
@@ -40,11 +44,11 @@ jobs:
       - name: Test bounded native-asset downloader
         run: node --test test/build.test.js
 
-      - name: Check JavaScript packages without native bootstrap
-        run: moon check --target js --deny-warn
+      - name: Check packages without native bootstrap
+        run: moon check --target ${{ matrix.target }} --deny-warn
 
-      - name: Test JavaScript unavailable facade
-        run: moon test --target js --release --deny-warn
+      - name: Test unavailable facade
+        run: moon test --target ${{ matrix.target }} --release --deny-warn
 
   native:
     name: Native (${{ matrix.platform }})
@@ -64,7 +68,7 @@ jobs:
             runner: windows-2025
     env:
       MBT_DAVE_REQUIRE_NATIVE: "1"
-      MOONBIT_INSTALL_VERSION: "0.10.11+8f8e8db1e"
+      MOONBIT_INSTALL_VERSION: "0.10.14+7d59c7ec9"
 
     steps:
       - name: Check out repository
