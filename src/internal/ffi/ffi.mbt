@@ -15,7 +15,7 @@ pub type RawEncryptor
 pub type RawDecryptor
 
 ///|
-extern "c" fn loader_status() -> Int = "mbt_dave_loader_status"
+extern "c" fn loader_status() -> Int32 = "mbt_dave_loader_status"
 
 ///|
 extern "c" fn loader_reason_bytes() -> Bytes = "mbt_dave_loader_reason"
@@ -27,12 +27,12 @@ extern "c" fn max_protocol_version_raw() -> UInt16 = "mbt_dave_max_supported_pro
 #borrow(auth_session_id)
 extern "c" fn raw_session_new(
   auth_session_id : Bytes,
-  has_auth_session_id : Int,
+  has_auth_session_id : Int32,
 ) -> RawSession = "mbt_dave_session_new"
 
 ///|
 #borrow(session)
-extern "c" fn raw_session_is_valid(session : RawSession) -> Int = "mbt_dave_session_is_valid"
+extern "c" fn raw_session_is_valid(session : RawSession) -> Int32 = "mbt_dave_session_is_valid"
 
 ///|
 #borrow(session)
@@ -115,7 +115,7 @@ extern "c" fn raw_session_pairwise_fingerprint(
 
 ///|
 #borrow(session)
-extern "c" fn raw_session_last_status(session : RawSession) -> Int = "mbt_dave_session_last_status"
+extern "c" fn raw_session_last_status(session : RawSession) -> Int32 = "mbt_dave_session_last_status"
 
 ///|
 #borrow(session)
@@ -127,14 +127,14 @@ extern "c" fn raw_session_failure_reason(session : RawSession) -> Bytes = "mbt_d
 
 ///|
 #borrow(key_ratchet)
-extern "c" fn raw_key_ratchet_is_valid(key_ratchet : RawKeyRatchet) -> Int = "mbt_dave_key_ratchet_is_valid"
+extern "c" fn raw_key_ratchet_is_valid(key_ratchet : RawKeyRatchet) -> Int32 = "mbt_dave_key_ratchet_is_valid"
 
 ///|
 extern "c" fn raw_encryptor_new() -> RawEncryptor = "mbt_dave_encryptor_new"
 
 ///|
 #borrow(encryptor)
-extern "c" fn raw_encryptor_is_valid(encryptor : RawEncryptor) -> Int = "mbt_dave_encryptor_is_valid"
+extern "c" fn raw_encryptor_is_valid(encryptor : RawEncryptor) -> Int32 = "mbt_dave_encryptor_is_valid"
 
 ///|
 #borrow(encryptor, key_ratchet)
@@ -147,15 +147,15 @@ extern "c" fn raw_encryptor_set_key_ratchet(
 #borrow(encryptor)
 extern "c" fn raw_encryptor_set_passthrough(
   encryptor : RawEncryptor,
-  enabled : Int,
+  enabled : Int32,
 ) -> Unit = "mbt_dave_encryptor_set_passthrough"
 
 ///|
 #borrow(encryptor)
 extern "c" fn raw_encryptor_assign_ssrc(
   encryptor : RawEncryptor,
-  ssrc : UInt,
-  codec : Int,
+  ssrc : UInt32,
+  codec : Int32,
 ) -> Unit = "mbt_dave_encryptor_assign_ssrc"
 
 ///|
@@ -166,31 +166,31 @@ extern "c" fn raw_encryptor_protocol_version(
 
 ///|
 #borrow(encryptor)
-extern "c" fn raw_encryptor_has_key(encryptor : RawEncryptor) -> Int = "mbt_dave_encryptor_has_key"
+extern "c" fn raw_encryptor_has_key(encryptor : RawEncryptor) -> Int32 = "mbt_dave_encryptor_has_key"
 
 ///|
 #borrow(encryptor)
-extern "c" fn raw_encryptor_is_passthrough(encryptor : RawEncryptor) -> Int = "mbt_dave_encryptor_is_passthrough"
+extern "c" fn raw_encryptor_is_passthrough(encryptor : RawEncryptor) -> Int32 = "mbt_dave_encryptor_is_passthrough"
 
 ///|
 #borrow(encryptor, frame)
 extern "c" fn raw_encryptor_encrypt(
   encryptor : RawEncryptor,
-  media_type : Int,
-  ssrc : UInt,
+  media_type : Int32,
+  ssrc : UInt32,
   frame : Bytes,
 ) -> Bytes = "mbt_dave_encryptor_encrypt"
 
 ///|
 #borrow(encryptor)
-extern "c" fn raw_encryptor_last_status(encryptor : RawEncryptor) -> Int = "mbt_dave_encryptor_last_status"
+extern "c" fn raw_encryptor_last_status(encryptor : RawEncryptor) -> Int32 = "mbt_dave_encryptor_last_status"
 
 ///|
 extern "c" fn raw_decryptor_new() -> RawDecryptor = "mbt_dave_decryptor_new"
 
 ///|
 #borrow(decryptor)
-extern "c" fn raw_decryptor_is_valid(decryptor : RawDecryptor) -> Int = "mbt_dave_decryptor_is_valid"
+extern "c" fn raw_decryptor_is_valid(decryptor : RawDecryptor) -> Int32 = "mbt_dave_decryptor_is_valid"
 
 ///|
 #borrow(decryptor, key_ratchet)
@@ -203,20 +203,20 @@ extern "c" fn raw_decryptor_transition_to_key_ratchet(
 #borrow(decryptor)
 extern "c" fn raw_decryptor_transition_to_passthrough(
   decryptor : RawDecryptor,
-  enabled : Int,
+  enabled : Int32,
 ) -> Unit = "mbt_dave_decryptor_transition_to_passthrough"
 
 ///|
 #borrow(decryptor, frame)
 extern "c" fn raw_decryptor_decrypt(
   decryptor : RawDecryptor,
-  media_type : Int,
+  media_type : Int32,
   frame : Bytes,
 ) -> Bytes = "mbt_dave_decryptor_decrypt"
 
 ///|
 #borrow(decryptor)
-extern "c" fn raw_decryptor_last_status(decryptor : RawDecryptor) -> Int = "mbt_dave_decryptor_last_status"
+extern "c" fn raw_decryptor_last_status(decryptor : RawDecryptor) -> Int32 = "mbt_dave_decryptor_last_status"
 
 ///|
 fn recognized_ids_to_fixed(
@@ -359,7 +359,7 @@ pub fn RawSession::pairwise_fingerprint(
 ///|
 /// Zero means the libdave call completed. Media operations preserve libdave's
 /// exact result codes; negative values are binding or loader failures.
-pub fn RawSession::last_status(self : Self) -> Int {
+pub fn RawSession::last_status(self : Self) -> Int32 {
   raw_session_last_status(self)
 }
 
@@ -403,8 +403,8 @@ pub fn RawEncryptor::set_passthrough(self : Self, enabled~ : Bool) -> Unit {
 ///|
 pub fn RawEncryptor::assign_ssrc(
   self : Self,
-  ssrc~ : UInt,
-  codec~ : Int,
+  ssrc~ : UInt32,
+  codec~ : Int32,
 ) -> Unit {
   raw_encryptor_assign_ssrc(self, ssrc, codec)
 }
@@ -427,15 +427,15 @@ pub fn RawEncryptor::is_passthrough(self : Self) -> Bool {
 ///|
 pub fn RawEncryptor::encrypt(
   self : Self,
-  media_type~ : Int,
-  ssrc~ : UInt,
+  media_type~ : Int32,
+  ssrc~ : UInt32,
   frame : Bytes,
 ) -> Bytes {
   raw_encryptor_encrypt(self, media_type, ssrc, frame)
 }
 
 ///|
-pub fn RawEncryptor::last_status(self : Self) -> Int {
+pub fn RawEncryptor::last_status(self : Self) -> Int32 {
   raw_encryptor_last_status(self)
 }
 
@@ -468,13 +468,13 @@ pub fn RawDecryptor::transition_to_passthrough(
 ///|
 pub fn RawDecryptor::decrypt(
   self : Self,
-  media_type~ : Int,
+  media_type~ : Int32,
   frame : Bytes,
 ) -> Bytes {
   raw_decryptor_decrypt(self, media_type, frame)
 }
 
 ///|
-pub fn RawDecryptor::last_status(self : Self) -> Int {
+pub fn RawDecryptor::last_status(self : Self) -> Int32 {
   raw_decryptor_last_status(self)
 }

@@ -16,7 +16,7 @@ preferred_target = "native"
 
 supported_targets = "js + native + wasm"
 
-// Keep the existing derived-trait API while validating on the pinned 0.10.14.
+// Keep the existing derived-trait API while validating on the pinned 0.10.15.
 
 warnings = "-implicit_impl_as_method"
 

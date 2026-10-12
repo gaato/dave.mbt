@@ -28,7 +28,7 @@ pub(all) enum EncryptFailure {
   MissingKeyRatchet
   MissingCryptor
   TooManyAttempts
-  Unknown(code~ : Int)
+  Unknown(code~ : Int32)
 } derive(Debug, Eq)
 
 ///|
@@ -38,7 +38,7 @@ pub(all) enum DecryptFailure {
   MissingKeyRatchet
   InvalidNonce
   MissingCryptor
-  Unknown(code~ : Int)
+  Unknown(code~ : Int32)
 } derive(Debug, Eq)
 
 ///|

@@ -130,7 +130,7 @@ pub fn RawSession::pairwise_fingerprint(
 }
 
 ///|
-pub fn RawSession::last_status(self : Self) -> Int {
+pub fn RawSession::last_status(self : Self) -> Int32 {
   ignore(self)
   -100
 }
@@ -176,8 +176,8 @@ pub fn RawEncryptor::set_passthrough(self : Self, enabled~ : Bool) -> Unit {
 ///|
 pub fn RawEncryptor::assign_ssrc(
   self : Self,
-  ssrc~ : UInt,
-  codec~ : Int,
+  ssrc~ : UInt32,
+  codec~ : Int32,
 ) -> Unit {
   ignore(self)
   ignore(ssrc)
@@ -205,8 +205,8 @@ pub fn RawEncryptor::is_passthrough(self : Self) -> Bool {
 ///|
 pub fn RawEncryptor::encrypt(
   self : Self,
-  media_type~ : Int,
-  ssrc~ : UInt,
+  media_type~ : Int32,
+  ssrc~ : UInt32,
   frame : Bytes,
 ) -> Bytes {
   ignore(self)
@@ -217,7 +217,7 @@ pub fn RawEncryptor::encrypt(
 }
 
 ///|
-pub fn RawEncryptor::last_status(self : Self) -> Int {
+pub fn RawEncryptor::last_status(self : Self) -> Int32 {
   ignore(self)
   -100
 }
@@ -254,7 +254,7 @@ pub fn RawDecryptor::transition_to_passthrough(
 ///|
 pub fn RawDecryptor::decrypt(
   self : Self,
-  media_type~ : Int,
+  media_type~ : Int32,
   frame : Bytes,
 ) -> Bytes {
   ignore(self)
@@ -264,7 +264,7 @@ pub fn RawDecryptor::decrypt(
 }
 
 ///|
-pub fn RawDecryptor::last_status(self : Self) -> Int {
+pub fn RawDecryptor::last_status(self : Self) -> Int32 {
   ignore(self)
   -100
 }

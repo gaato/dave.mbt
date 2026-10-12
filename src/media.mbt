@@ -1,5 +1,5 @@
 ///|
-fn media_type_code(media_type : MediaType) -> Int {
+fn media_type_code(media_type : MediaType) -> Int32 {
   match media_type {
     Audio => 0
     Video => 1
@@ -7,7 +7,7 @@ fn media_type_code(media_type : MediaType) -> Int {
 }
 
 ///|
-fn codec_code(codec : Codec) -> Int {
+fn codec_code(codec : Codec) -> Int32 {
   match codec {
     Opus => 1
     Vp8 => 2
@@ -27,7 +27,7 @@ fn Codec::media_type(self : Codec) -> MediaType {
 }
 
 ///|
-fn encrypt_failure(code : Int) -> EncryptFailure {
+fn encrypt_failure(code : Int32) -> EncryptFailure {
   match code {
     1 => EncryptionFailure
     2 => MissingKeyRatchet
@@ -38,7 +38,7 @@ fn encrypt_failure(code : Int) -> EncryptFailure {
 }
 
 ///|
-fn decrypt_failure(code : Int) -> DecryptFailure {
+fn decrypt_failure(code : Int32) -> DecryptFailure {
   match code {
     1 => DecryptionFailure
     2 => MissingKeyRatchet
@@ -51,7 +51,7 @@ fn decrypt_failure(code : Int) -> DecryptFailure {
 ///|
 fn check_media_configuration_status(
   operation : String,
-  status : Int,
+  status : Int32,
 ) -> Unit raise DaveError {
   if status != 0 {
     raise NativeFailure(operation~, reason="native status \{status}")
@@ -66,7 +66,7 @@ fn check_media_configuration_status(
 /// the same mutable state and must not be used concurrently.
 pub struct Encryptor {
   priv raw : @ffi.RawEncryptor
-  priv codecs : Map[UInt, Codec]
+  priv codecs : Map[UInt32, Codec]
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn Encryptor::set_passthrough_mode(
 /// Associate an RTP SSRC with its media codec.
 pub fn Encryptor::assign_ssrc_to_codec(
   self : Encryptor,
-  ssrc~ : UInt,
+  ssrc~ : UInt32,
   codec~ : Codec,
 ) -> Unit raise DaveError {
   self.raw.assign_ssrc(ssrc~, codec=codec_code(codec))
@@ -148,7 +148,7 @@ pub fn Encryptor::is_passthrough_mode(self : Encryptor) -> Bool {
 pub fn Encryptor::encrypt(
   self : Encryptor,
   media_type~ : MediaType,
-  ssrc~ : UInt,
+  ssrc~ : UInt32,
   frame : Bytes,
 ) -> Bytes raise DaveError {
   if !self.raw.is_passthrough() {
